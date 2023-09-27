@@ -33,6 +33,12 @@ public class EncompassClientClientImpl implements EncompassClient {
 
 	@Value("${servicio.token}")
 	private String tokenUrl;
+	
+	@Value("${servicio.client_secret}")
+	private String clientSecret;
+	
+	@Value("${servicio.client_id}")
+	private String clientId;
 
 	@Override
 	public TokenResponseDto getToken(String username, String password) {
@@ -43,8 +49,8 @@ public class EncompassClientClientImpl implements EncompassClient {
 	    requestBody.add("grant_type", "password");
 	    requestBody.add("username", username);
 	    requestBody.add("password", password);
-	    requestBody.add("client_id", "vov3yaf");
-	    requestBody.add("client_secret", "1hJ6zTN@6mXLQ@4XGl!zlYw1XPaTgw#aYB1poCrBG271*oU65bJsj8IzPhASJrB2");
+	    requestBody.add("client_id", clientId);
+	    requestBody.add("client_secret", clientSecret);
 
 	    HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
