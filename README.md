@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab.com/open6373908/software/gacituacompania/com-ms-reloff.git
+git remote add origin https://github.com/JesusGarcia9009/com-ms-reloff.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://gitlab.com/open6373908/software/gacituacompania/com-ms-reloff/-/settings/integrations)
+- [ ] [Set up project integrations](https://github.com/JesusGarcia9009/com-ms-reloff/settings)
 
 ## Collaborate with your team
 
