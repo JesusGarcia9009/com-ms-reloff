@@ -16,6 +16,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.ms.reloff.dto.Prequalification;
 import com.ms.reloff.dto.TokenResponseDto;
 import com.ms.reloff.utils.Utils;
 
@@ -39,6 +40,9 @@ public class EncompassClientClientImpl implements EncompassClient {
 	
 	@Value("${servicio.client_id}")
 	private String clientId;
+	
+	@Value("${servicio.loan}")
+	private String loanUrl;
 
 	@Override
 	public TokenResponseDto getToken(String username, String password) {
@@ -67,6 +71,39 @@ public class EncompassClientClientImpl implements EncompassClient {
         System.out.println(Utils.printCurlEquivalent(tokenUrl, HttpMethod.POST, requestEntity));
         
 		TokenResponseDto responseBody = null;
+		if (response.getStatusCode().is2xxSuccessful()) {
+			responseBody = response.getBody();
+		} else {
+			throw new RuntimeException("Error al obtener el token de acceso: " + response.getStatusCode());
+		}
+		log.info(String.format(LOG_END, Thread.currentThread().getStackTrace()[1].getMethodName()));
+		return responseBody;
+	}
+	
+	
+	/**
+	 * Getting a full Loan data
+	 */
+	
+	@Override
+	public Prequalification getLoan(String eToken, String loanId) {
+		log.info(String.format(LOG_START, Thread.currentThread().getStackTrace()[1].getMethodName()));
+
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+		
+		HttpEntity requestEntity = null;
+
+		ResponseEntity<Prequalification> response = new RestTemplate().exchange(
+				loanUrl + "/" + loanId,
+	            HttpMethod.GET,
+	            requestEntity,
+	            Prequalification.class
+	    );
+		
+        System.out.println(Utils.printCurlEquivalent(tokenUrl, HttpMethod.POST, requestEntity));
+        
+        Prequalification responseBody = null;
 		if (response.getStatusCode().is2xxSuccessful()) {
 			responseBody = response.getBody();
 		} else {

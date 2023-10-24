@@ -25,6 +25,9 @@ public interface ExampleController {
 	 */
 	@ApiOperation(value = "Get token data", notes = "Retorna los datos token")
 	public ResponseEntity<TokenResponseDto> getTokenData();
+
+	@ApiOperation(value = "Get loan data", notes = "Retorna los datos del loan")
+	public <T> ResponseEntity<T> getLoanData(String eToken, String loanId);
 	
 	
 	

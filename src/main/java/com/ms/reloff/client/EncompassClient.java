@@ -1,5 +1,6 @@
 package com.ms.reloff.client;
 
+import com.ms.reloff.dto.Prequalification;
 import com.ms.reloff.dto.TokenResponseDto;
 
 /**
@@ -19,5 +20,10 @@ public interface EncompassClient {
 	 * @return token see {@link TokenResponseDto}
 	 */
 	public TokenResponseDto getToken(String username, String password);
+
+	/**
+	 * Getting a full Loan data
+	 */
+	public Prequalification getLoan(String eToken, String loanId);
 	
 }
